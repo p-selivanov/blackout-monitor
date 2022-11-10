@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C190907C-E786-4AC1-A108-B9CFCA43E42A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackoutMonitor.Api", "src\BlackoutMonitor.Api\BlackoutMonitor.Api.csproj", "{764382E1-AFFE-4A1B-B7AE-6695CF52895A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution-items", "_solution-items", "{4DA95380-1951-42BE-A049-E01E09DF739A}"
+	ProjectSection(SolutionItems) = preProject
+		beep.sh = beep.sh
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{764382E1-AFFE-4A1B-B7AE-6695CF52895A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764382E1-AFFE-4A1B-B7AE-6695CF52895A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764382E1-AFFE-4A1B-B7AE-6695CF52895A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764382E1-AFFE-4A1B-B7AE-6695CF52895A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{764382E1-AFFE-4A1B-B7AE-6695CF52895A} = {C190907C-E786-4AC1-A108-B9CFCA43E42A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7FAE0554-05B8-4558-A6AA-0DAD1C7CC7C0}
+	EndGlobalSection
+EndGlobal
