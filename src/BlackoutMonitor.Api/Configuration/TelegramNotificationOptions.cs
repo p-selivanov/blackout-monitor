@@ -1,6 +1,8 @@
-﻿namespace BlackoutMonitor.Api.Configuration;
+﻿using System.Collections.Generic;
+
+namespace BlackoutMonitor.Api.Configuration;
 
 public class TelegramNotificationOptions
 {
-    public string ChannelId { get; set; }
+    public Dictionary<string, string> BeeperChannelIds { get; set; }
 }

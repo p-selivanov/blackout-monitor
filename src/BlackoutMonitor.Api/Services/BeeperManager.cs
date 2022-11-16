@@ -107,7 +107,7 @@ public class BeeperManager : BackgroundService
         {
             await Task.Delay(_options.CheckInterval, stoppingToken);
 
-            _logger.LogInformation("Running beeper expiration check");
+            _logger.LogDebug("Running beeper expiration check");
 
             await ExpireBeepersAsync();
         }

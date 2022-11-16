@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.Linq;
 using System.Text.Json.Serialization;
 using BlackoutMonitor.Api.Configuration;
 using BlackoutMonitor.Api.Infrastructure;
@@ -64,7 +64,9 @@ public class Startup
 
         services.Configure<TelegramNotificationOptions>(options =>
         {
-            options.ChannelId = Configuration.GetValue<string>("TelegramNotification:ChannelId");
+            options.BeeperChannelIds = Configuration.GetSection("TelegramNotification:BeeperChannelIds")
+                .GetChildren()
+                .ToDictionary(x => x.Key.ToLower(), x => x.Value);
         });
 
         services.Configure<BeeperExpirationOptions>(options =>

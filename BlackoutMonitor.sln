@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlackoutMonitor.Api", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_solution-items", "_solution-items", "{4DA95380-1951-42BE-A049-E01E09DF739A}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		beep.sh = beep.sh
 		README.md = README.md
 	EndProjectSection

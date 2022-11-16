@@ -20,16 +20,16 @@ public class BlackoutController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetBlackouts()
+    public async Task<IActionResult> GetBlackouts([FromQuery] string beeperId)
     {
-        var blackouts = await _blackoutRepository.GetAllBlackoutsAsync();
+        var blackouts = await _blackoutRepository.GetBlackoutsAsync(beeperId);
         return Ok(blackouts);
     }
 
     [HttpGet("csv")]
-    public async Task GetBlackoutsCsv([FromQuery] string tz)
+    public async Task GetBlackoutsCsv([FromQuery] string beeperId, [FromQuery] string tz)
     {
-        var blackouts = await _blackoutRepository.GetAllBlackoutsAsync();
+        var blackouts = await _blackoutRepository.GetBlackoutsAsync(beeperId);
 
         if (string.IsNullOrEmpty(tz) == false &&
             int.TryParse(tz, out var offset))

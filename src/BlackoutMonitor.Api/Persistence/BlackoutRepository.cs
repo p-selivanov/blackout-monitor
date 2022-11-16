@@ -21,13 +21,18 @@ public class BlackoutRepository
         _dbName = options.Value.DbName;
     }
 
-    public async Task<IList<BlackoutDetail>> GetAllBlackoutsAsync()
+    public async Task<IList<BlackoutDetail>> GetBlackoutsAsync(string beeperId = null)
     {
         var container = GetContainer();
 
-        using var feed = container
-            .GetItemLinqQueryable<BlackoutDetail>()
-            .ToFeedIterator();
+        IQueryable<BlackoutDetail> query = container.GetItemLinqQueryable<BlackoutDetail>();
+
+        if (string.IsNullOrEmpty(beeperId) == false)
+        {
+            query = query.Where(x => x.BeeperId == beeperId);
+        }
+
+        using var feed = query.ToFeedIterator();
 
         var result = new List<BlackoutDetail>();
         while (feed.HasMoreResults)
