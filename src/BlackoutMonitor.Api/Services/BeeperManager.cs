@@ -165,12 +165,14 @@ public class BeeperManager : BackgroundService
             var blackout = await repository.GetLastBlackoutAsync(beeperId);
             if (blackout is null)
             {
-                _logger.LogError("Cannot finish blackout from beeper {beeperId}. It is not found in the database.", beeperId);
+                _logger.LogError("Cannot finish blackout for beeper {beeperId}. It is not found in the database.", beeperId);
+                return;
             }
 
             if (blackout.FinishTimestamp is not null)
             {
-                _logger.LogError("Cannot finish blackout from beeper {beeperId}. It is already finished.", beeperId);
+                _logger.LogError("Cannot finish blackout for beeper {beeperId}. It is already finished.", beeperId);
+                return;
             }
 
             await repository.UpdateBlackoutAsync(beeperId, blackout.Id, finishTimestamp);
