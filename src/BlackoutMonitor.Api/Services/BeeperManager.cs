@@ -143,8 +143,10 @@ public class BeeperManager : BackgroundService
             var repository = scope.ServiceProvider.GetRequiredService<BlackoutRepository>();
             var notifier = scope.ServiceProvider.GetRequiredService<NotificationService>();
 
+            var lastBlackout = await repository.GetLastBlackoutAsync(beeperId);
+
             await repository.CreateBlackoutAsync(beeperId, startTimestamp);
-            await notifier.NotifyBlackoutStartedAsync(beeperId, startTimestamp);
+            await notifier.NotifyBlackoutStartedAsync(beeperId, lastBlackout?.FinishTimestamp, startTimestamp);
         }
         catch (Exception ex)
         {
@@ -176,7 +178,7 @@ public class BeeperManager : BackgroundService
             }
 
             await repository.UpdateBlackoutAsync(beeperId, blackout.Id, finishTimestamp);
-            await notifier.NotifyBlackoutFinishedAsync(beeperId, finishTimestamp);
+            await notifier.NotifyBlackoutFinishedAsync(beeperId, blackout.StartTimestamp, finishTimestamp);
         }
         catch (Exception ex)
         {

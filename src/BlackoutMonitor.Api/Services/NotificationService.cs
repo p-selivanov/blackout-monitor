@@ -23,7 +23,7 @@ public class NotificationService
         _logger = logger;
     }
 
-    public async Task NotifyBlackoutStartedAsync(string beeperId, DateTime startTimestamp)
+    public async Task NotifyBlackoutStartedAsync(string beeperId, DateTime? prevFinishTimestamp, DateTime startTimestamp)
     {
         var channelId = GetBeeperChannelId(beeperId);
         if (string.IsNullOrEmpty(channelId))
@@ -31,10 +31,17 @@ public class NotificationService
             return;
         }
 
-        await _botClient.SendTextMessageAsync(channelId, "Вимкнули");
+        var message = "- Вимкнули";
+        if (prevFinishTimestamp is not null)
+        {
+            var duration = startTimestamp - prevFinishTimestamp.Value;
+            message += $"\nТривалість увімкнення {FormatDuration(duration)}";
+        }
+
+        await _botClient.SendTextMessageAsync(channelId, message);
     }
 
-    public async Task NotifyBlackoutFinishedAsync(string beeperId, DateTime finishTimestamp)
+    public async Task NotifyBlackoutFinishedAsync(string beeperId, DateTime startTimestamp, DateTime finishTimestamp)
     {
         var channelId = GetBeeperChannelId(beeperId);
         if (string.IsNullOrEmpty(channelId))
@@ -42,7 +49,11 @@ public class NotificationService
             return;
         }
 
-        await _botClient.SendTextMessageAsync(channelId, "Увімкнули");
+        var message = "+ Увімкнули";
+        var duration = finishTimestamp - startTimestamp;
+        message += $"\nТривалість вимкнення {FormatDuration(duration)}";
+
+        await _botClient.SendTextMessageAsync(channelId, message);
     }
 
     private string GetBeeperChannelId(string beeperId)
@@ -54,5 +65,10 @@ public class NotificationService
         }
 
         return _telegramOptions.BeeperChannelIds[beeperId];
+    }
+
+    private static string FormatDuration(TimeSpan duration)
+    {
+        return $"{(int)duration.TotalHours:00}:{duration.Minutes:00}";
     }
 }
