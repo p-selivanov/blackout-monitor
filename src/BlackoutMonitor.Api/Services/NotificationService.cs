@@ -31,14 +31,15 @@ public class NotificationService
             return;
         }
 
-        var message = "- Вимкнули";
         if (prevFinishTimestamp is not null)
         {
             var duration = startTimestamp - prevFinishTimestamp.Value;
-            message += $"\nТривалість увімкнення {FormatDuration(duration)}";
+            var message1 = $"+ Увімкнення тривало {FormatDuration(duration)}";
+            await _botClient.SendTextMessageAsync(channelId, message1);
         }
 
-        await _botClient.SendTextMessageAsync(channelId, message);
+        var message2 = "- Вимкнули";
+        await _botClient.SendTextMessageAsync(channelId, message2);
     }
 
     public async Task NotifyBlackoutFinishedAsync(string beeperId, DateTime startTimestamp, DateTime finishTimestamp)
@@ -49,11 +50,12 @@ public class NotificationService
             return;
         }
 
-        var message = "+ Увімкнули";
         var duration = finishTimestamp - startTimestamp;
-        message += $"\nТривалість вимкнення {FormatDuration(duration)}";
+        var message1 = $"- Вимкнення тривало {FormatDuration(duration)}";
+        await _botClient.SendTextMessageAsync(channelId, message1);
 
-        await _botClient.SendTextMessageAsync(channelId, message);
+        var message2 = "+ Увімкнули";
+        await _botClient.SendTextMessageAsync(channelId, message2);
     }
 
     private string GetBeeperChannelId(string beeperId)
