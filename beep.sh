@@ -1,7 +1,7 @@
 #!/bin/bash
 
 base_uri="https://asrv-blackout-monitor.azurewebsites.net/"
-beeper_id="d13"
+beeper_id="test"
 uri="${base_uri}beepers/${beeper_id}/status"
 body="{\"status\":\"Healthy\"}"
 
