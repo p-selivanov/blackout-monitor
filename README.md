@@ -1,4 +1,4 @@
-# Balckout Monitor
+# Blackout Monitor
 Server application for monitoring blackouts.
 Monitors a few signaling devices, and figures out when a device is offline.
 Writes history of each blackout to the Cosmos DB and notifies a Telegram channel about it.
